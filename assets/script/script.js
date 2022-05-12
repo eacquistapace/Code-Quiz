@@ -24,7 +24,3 @@ var characterArray = [
     desc: "Miki Kuroda",
   },
 ];
-
-//Logic variables
-var timer = 5;
-var currentIndex = 0;
