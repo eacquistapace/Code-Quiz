@@ -1,3 +1,8 @@
+var characterImage = $("#character-img");
+var characterDesc = $("#character-desc");
+var timerEl = $("#game-timer");
+
+//Imgs and img descriptions array
 var characterArray = [
   {
     img: "./assets/images/trafalgar-law.jpg",
