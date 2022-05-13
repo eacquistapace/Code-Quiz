@@ -15,36 +15,38 @@ var characterArray = [
   {
     img: "assets/images/trafalgar-law.jpg",
     desc: "Trafalgar Law",
-
-    answers: {
-      answerA: "Bleach",
-      answerB: "One Piece",
-      answerC: "JoJo's Bizarre Adventure",
-    },
-    correctAnswer: "answerB",
   },
 
   {
     img: "assets/images/kilala.jpg",
     desc: "Kilala",
-
-    answers: {
-      answerA: "Inuyasha",
-      answerB: "Pokemon",
-      answerC: "Hunter x Hunter",
-    },
-    correctAnswer: "answerA",
   },
 
   {
     img: "assets/images/miki-kuroda.jpg",
     desc: "Miki Kuroda",
+  },
+];
 
-    answers: {
-      answerA: "Attack on Titan",
-      answerB: "Darling in the Franxx",
-      answerC: "Devilman Crybaby",
-    },
+var answersArray = [
+  {
+    answerA: "Bleach",
+    answerB: "One Piece",
+    answerC: "JoJo's Bizarre Adventure",
+    correctAnswer: "answerB",
+  },
+
+  {
+    answerA: "Inuyasha",
+    answerB: "Pokemon",
+    answerC: "Hunter x Hunter",
+    correctAnswer: "answerA",
+  },
+
+  {
+    answerA: "Attack on Titan",
+    answerB: "Darling in the Franxx",
+    answerC: "Devilman Crybaby",
     correctAnswer: "answerC",
   },
 ];
@@ -57,6 +59,7 @@ function init() {
   gameCard.hide();
   renderCharacter();
   renderHighScores();
+  renderAnswers();
 }
 
 startButton.on("click", startGame);
@@ -67,6 +70,7 @@ answerA.on("click", function () {
   if (currentIndex === characterArray.length) currentIndex = 0;
   score++;
   renderCharacter();
+  renderAnswers();
 });
 
 answerB.on("click", function () {
@@ -74,6 +78,7 @@ answerB.on("click", function () {
   if (currentIndex === characterArray.length) currentIndex = 0;
   score++;
   renderCharacter();
+  renderAnswers();
 });
 
 answerC.on("click", function () {
@@ -81,6 +86,7 @@ answerC.on("click", function () {
   if (currentIndex === characterArray.length) currentIndex = 0;
   score++;
   renderCharacter();
+  renderAnswers();
 });
 
 function startGame() {
@@ -122,6 +128,12 @@ function endGame() {
 function renderCharacter() {
   characterImg.attr("src", characterArray[currentIndex].img);
   characterDesc.text(characterArray[currentIndex].desc);
+}
+
+function renderAnswers() {
+  answerA.text(answersArray[currentIndex].answerA);
+  answerB.text(answersArray[currentIndex].answerB);
+  answerC.text(answersArray[currentIndex].answerC);
 }
 
 function renderHighScores() {
