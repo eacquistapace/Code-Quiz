@@ -102,6 +102,21 @@ function startGame() {
 function endGame() {
   console.log("Game Over");
   gameCard.hide();
+  startButton.show();
+  var initials = prompt(
+    "Your score is: " +
+      score +
+      "\nEnter your initials to be on the high scores list!"
+  );
+  var currentScores = JSON.parse(localStorage.getItem("gameScore")) || [];
+  var userObj = {
+    initials,
+    score,
+  };
+
+  currentScores.push(userObj);
+  localStorage.setItem("gameScore", JSON.stringify(currentScores));
+  renderHighScores();
 }
 
 function renderCharacter() {
@@ -119,7 +134,7 @@ function renderHighScores() {
     var scoreObj = currentScores[index];
     var newLi = $("<li>", {
       class: "list-group-item",
-    }).text(scoreObj.initials + "---------" + scoreObj.score);
+    }).text(scoreObj.initials + "----------" + scoreObj.score);
     highScoresList.append(newLi);
   }
 }
