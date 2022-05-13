@@ -4,9 +4,9 @@ var startButton = $("#start-button");
 var gameCard = $("#game-card");
 var characterImg = $("#character-img");
 var characterDesc = $("#character-desc");
-var answerA = $("#a");
-var answerB = $("#b");
-var answerC = $("#c");
+var answerA = $("#a-button");
+var answerB = $("#b-button");
+var answerC = $("#c-button");
 var highScoresList = $("#high-scores");
 //create option 1, 2, 3 var buttons for game answers?
 
@@ -21,7 +21,7 @@ var characterArray = [
       answerB: "One Piece",
       answerC: "JoJo's Bizarre Adventure",
     },
-    correctAnswer: "One Piece",
+    correctAnswer: "answerB",
   },
 
   {
@@ -33,7 +33,7 @@ var characterArray = [
       answerB: "Pokemon",
       answerC: "Hunter x Hunter",
     },
-    correctAnswer: "Inuyasha",
+    correctAnswer: "answerA",
   },
 
   {
@@ -45,7 +45,7 @@ var characterArray = [
       answerB: "Darling in the Franxx",
       answerC: "Devilman Crybaby",
     },
-    correctAnswer: "Devilman Crybaby",
+    correctAnswer: "answerC",
   },
 ];
 
@@ -60,6 +60,28 @@ function init() {
 }
 
 startButton.on("click", startGame);
+
+//WILL NEED TO LOOK AT THIS AGAIN
+answerA.on("click", function () {
+  currentIndex++;
+  if (currentIndex === characterArray.length) currentIndex = 0;
+  score++;
+  renderCharacter();
+});
+
+answerB.on("click", function () {
+  currentIndex++;
+  if (currentIndex === characterArray.length) currentIndex = 0;
+  score++;
+  renderCharacter();
+});
+
+answerC.on("click", function () {
+  currentIndex++;
+  if (currentIndex === characterArray.length) currentIndex = 0;
+  score++;
+  renderCharacter();
+});
 
 function startGame() {
   startButton.hide();
@@ -79,6 +101,7 @@ function startGame() {
 
 function endGame() {
   console.log("Game Over");
+  gameCard.hide();
 }
 
 function renderCharacter() {
@@ -100,3 +123,5 @@ function renderHighScores() {
     highScoresList.append(newLi);
   }
 }
+
+//GAME BUTTON FUNCTIONALITY 3:12:00
