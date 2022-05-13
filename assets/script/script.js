@@ -8,7 +8,6 @@ var answerA = $("#a-button");
 var answerB = $("#b-button");
 var answerC = $("#c-button");
 var highScoresList = $("#high-scores");
-//create option 1, 2, 3 var buttons for game answers?
 
 //Imgs and img descriptions array
 var characterArray = [
@@ -28,32 +27,52 @@ var characterArray = [
   },
 ];
 
+//Answers arrays w/ correct answer
+//!!Need to fix
 var answersArray = [
   {
     answerA: "Bleach",
     answerB: "One Piece",
     answerC: "JoJo's Bizarre Adventure",
-    correctAnswer: "answerB",
+    // correctAnswer: answerB,
   },
 
   {
     answerA: "Inuyasha",
     answerB: "Pokemon",
     answerC: "Hunter x Hunter",
-    correctAnswer: "answerA",
+    // correctAnswer: answerA,
   },
 
   {
     answerA: "Attack on Titan",
     answerB: "Darling in the Franxx",
     answerC: "Devilman Crybaby",
-    correctAnswer: "answerC",
+    // correctAnswer: answerC,
   },
 ];
 
+//Correct answers? (created array to try and fix correct answer problem)
+//!!Need to fix
+var correctAnswerArray = [
+  {
+    correctAnswer: answerB,
+  },
+
+  {
+    correctAnswer: answerA,
+  },
+
+  {
+    correctAnswer: answerC,
+  },
+];
+
+//Logic variables
 var timer = 10;
 var currentIndex = 0;
 
+//Initial page presentation
 init();
 function init() {
   gameCard.hide();
@@ -62,40 +81,42 @@ function init() {
   renderAnswers();
 }
 
+//Starts game on button click
 startButton.on("click", startGame);
 
-//WILL NEED TO LOOK AT THIS AGAIN
+//Changes current index for character and answers. (maybe check answer if I could get it to work)
 answerA.on("click", function () {
   currentIndex++;
   if (currentIndex === characterArray.length) currentIndex = 0;
-  score++;
   renderCharacter();
   renderAnswers();
+  checkAnswer();
 });
 
 answerB.on("click", function () {
   currentIndex++;
   if (currentIndex === characterArray.length) currentIndex = 0;
-  score++;
   renderCharacter();
   renderAnswers();
+  checkAnswer();
 });
 
 answerC.on("click", function () {
   currentIndex++;
   if (currentIndex === characterArray.length) currentIndex = 0;
-  score++;
   renderCharacter();
   renderAnswers();
+  checkAnswer();
 });
 
+//Start game function page and timer reaction
 function startGame() {
   startButton.hide();
   gameCard.show();
   timer = 10;
   score = 0;
   var gameTimer = setInterval(() => {
-    if (timer === 0) {
+    if (timer <= 0) {
       clearInterval(gameTimer);
       endGame();
     }
@@ -105,6 +126,7 @@ function startGame() {
   }, 1000);
 }
 
+//End game prompt to pull up high scores list form
 function endGame() {
   console.log("Game Over");
   gameCard.hide();
@@ -125,17 +147,20 @@ function endGame() {
   renderHighScores();
 }
 
+//Changing current character
 function renderCharacter() {
   characterImg.attr("src", characterArray[currentIndex].img);
   characterDesc.text(characterArray[currentIndex].desc);
 }
 
+//Changing current answers
 function renderAnswers() {
   answerA.text(answersArray[currentIndex].answerA);
   answerB.text(answersArray[currentIndex].answerB);
   answerC.text(answersArray[currentIndex].answerC);
 }
 
+//Interaction with local storage in order to display high scores
 function renderHighScores() {
   var currentScores = JSON.parse(localStorage.getItem("gameScore")) || [];
   highScoresList.empty();
@@ -151,4 +176,16 @@ function renderHighScores() {
   }
 }
 
-//GAME BUTTON FUNCTIONALITY 3:12:00
+//Supposed to check answer but just gives user 'incorrect' everytime to make this a very short game since it also takes time off the clock for incorrect answers.
+//!!Need to fix
+function checkAnswer() {
+  var correct = correctAnswerArray[currentIndex].correctAnswer;
+
+  if ("click" === correct) {
+    score++;
+    alert("That Is Correct!");
+  } else if ("click" !== correct) {
+    timer--;
+    alert("That Is Incorrect.");
+  }
+}
